@@ -23,6 +23,10 @@
     ></hm-input>
     <!-- 登录 -->
     <hm-button @click="fd">登录</hm-button>
+    <!-- 去注册得链接 -->
+    <div class="go-register">
+      没有账号,去<router-link to="/register" class="link">注册</router-link>
+    </div>
   </div>
 </template>
 
@@ -33,6 +37,11 @@ export default {
       username: '',
       password: '',
     }
+  },
+  created() {
+    this.username = this.$route.params.username
+    this.password = this.$route.params.password
+    // console.log(this.$route)
   },
   methods: {
     async fd() {
@@ -54,14 +63,24 @@ export default {
         console.log(res.data)
         const { statusCode, message } = res.data
         if (statusCode === 200) {
-          this.$toast.success('登录成功')
+          this.$toast.success(message)
           this.$router.push('/user')
         } else {
-          this.$toast.fail('登录失败')
+          this.$toast.fail(message)
         }
       })
     },
   },
 }
 </script>
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.go-register {
+  margin-top: 20px;
+  font-size: 20px;
+  text-align: right;
+  padding: 0 10px;
+  .link {
+    color: #999;
+  }
+}
+</style>
