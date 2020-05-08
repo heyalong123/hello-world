@@ -1,5 +1,7 @@
 <template>
-  <router-view></router-view>
+  <div class="hm-user">
+    我是user组件
+  </div>
 </template>
 
 <script>
